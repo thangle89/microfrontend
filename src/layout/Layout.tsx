@@ -19,6 +19,21 @@ const Container = styled.div`
     max-width: 1024px;
 `
 
+const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid grey;
+`
+
+const Nav = styled.nav`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const Link = styled.a`
+  width: 120px;
+`;
+
 class Layout extends React.PureComponent<Props> {
   componentDidMount() {
     this.props.getInitialState();
@@ -26,7 +41,15 @@ class Layout extends React.PureComponent<Props> {
   render() {
     return (
       <Container>
-        <h1> Users Management</h1>
+        <Header> 
+          <div>
+            <div><h1>Simple crafts</h1></div>
+          </div>
+          <Nav>
+            <Link>Posts</Link>
+            <Link>About</Link>
+          </Nav>
+        </Header>
         {this.props.children}
       </Container>
     );

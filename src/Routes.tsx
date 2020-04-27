@@ -1,9 +1,8 @@
 import React from 'react';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { History } from 'history';
-import ShipmentList from 'components/ShipmentList';
 import Layout from 'layout/Layout';
-import ShipmentDetails from 'components/ShipmentDetails';
+import Home from 'components/Home';
 
 interface Props {
   history: History;
@@ -16,12 +15,12 @@ class Routes extends React.PureComponent<Props> {
     return (
       <Layout>
         <Switch location={this.props.history.location}>
-          <Route path='/' component={ShipmentList} exact={true} />
-          <Route
+          <Route path='/' component={Home} exact={true} />
+          {/* <Route
             path='/shipment/:id'
             component={ShipmentDetails}
             exact={true}
-          />
+          /> */}
           <Redirect to='/' />
         </Switch>
       </Layout>

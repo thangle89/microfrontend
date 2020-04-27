@@ -37,7 +37,7 @@ module.exports = {
     stats: { children: false },
     https: false,
     host: "localhost",
-    port: "4500",
+    port: "8080",
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
