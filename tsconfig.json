@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    // Basic settings
+    "allowJs": true,
+    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es2015.promise",
+      "es2015.collection",
+      "es2015.symbol",
+      "es6",
+      "es5"
+    ],
+    "downlevelIteration": true,
+    "jsx": "react",
+    "declaration": false,
+    "sourceMap": true,
+    "baseUrl": "src",
+    "outDir": "./dist/js",
+    // Rules
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    // Typings
+    "typeRoots": ["./src/typings", "./node_modules/@types"],
+    "types": ["node", "react", "react-dom"]
+  }
+}
