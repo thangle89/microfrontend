@@ -40,7 +40,7 @@ const Nav = styled.nav`
 `;
 
 const Link = styled(NavLink)`
-  width: 100px;
+  min-width: 90px;
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 14px;
@@ -77,7 +77,7 @@ class Layout extends React.PureComponent<Props> {
       <>
         <Header>
           <Head>
-            <Title><h2>Simple crafts</h2></Title>
+            <Title><h2>SimpleCrafts</h2></Title>
             <Nav>
             <Link to="/">Posts</Link>
             <Link to="/about">About</Link>
