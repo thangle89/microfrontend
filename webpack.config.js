@@ -40,7 +40,7 @@ module.exports = {
     port: "8080",
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: [".ts", ".tsx", ".js", ".png"],
     modules: [path.resolve("./src"), path.resolve("./node_modules")],
     plugins: [new TsconfigPathsPlugin()]
   },
@@ -54,6 +54,15 @@ module.exports = {
           {
             loader: "awesome-typescript-loader",
             options: { useCache: true, forceIsolatedModules: true }
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        include: [path.resolve(__dirname,"./src/assets")],
+        use: [
+          {
+            loader: 'url-loader',
           }
         ]
       }

@@ -1,18 +1,22 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { shipmentActions } from 'store/Shipment';
-import { ApplicationState } from 'store';
 import styled from 'styled-components';
+import { NavLink, withRouter } from 'react-router-dom';
+import { History } from 'history';
 
-interface DispatchProps {
-  getInitialState: typeof shipmentActions.getInitialState;
-}
 
-interface StateProps {
-  totalShipment: number;
-}
+interface Props {
+  history: History;
+  location: any;
+  match: any;
+};
 
-type Props = StateProps & DispatchProps;
+const Profile = styled.div`
+  img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+`;
 
 const Container = styled.div`
     margin: 0 auto;
@@ -22,49 +26,71 @@ const Container = styled.div`
 const Header = styled.header`
   display: flex;
   flex-direction: column;
-  border: 1px solid grey;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  color: black;
+  background: #fff;
+  border-radius: 2px;
+  align-items: center;
 `
 
 const Nav = styled.nav`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-evenly;
+  width: 250px;
 `;
 
-const Link = styled.a`
-  width: 120px;
+const Link = styled(NavLink)`
+  width: 100px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  :hover, :active{
+    color: black;
+    background: #00FFFF;
+  }
+  
 `;
+
+const Head = styled.div`
+  display: flex;
+  justify-content: space-around;
+  padding: 0 24px;
+  align-items: center;
+  max-width: 720px;
+  width: 75%;
+`
+
+const Title = styled.div`
+  width: 50%;
+`;
+
 
 class Layout extends React.PureComponent<Props> {
-  componentDidMount() {
-    this.props.getInitialState();
-  }
   render() {
+    const img = require('assets/profile.png');
+    if(!this.props || !this.props.location || !this.props.location.pathname) {
+      return null;
+    }
     return (
-      <Container>
-        <Header> 
-          <div>
-            <div><h1>Simple crafts</h1></div>
-          </div>
-          <Nav>
-            <Link>Posts</Link>
-            <Link>About</Link>
+      <>
+        <Header>
+          <Head>
+            <Title><h2>Simple crafts</h2></Title>
+            <Nav>
+            <Link to="/">Posts</Link>
+            <Link to="/about">About</Link>
           </Nav>
+            <Profile><img src={img.default}/></Profile>
+          </Head>
         </Header>
-        {this.props.children}
-      </Container>
+        <Container>
+          {this.props.children}
+        </Container>
+      </>
     );
   }
 }
 
-const mapStateToProps = (state: ApplicationState) => ({
-  totalShipment: state.shipmentIds.length
-});
-
-const mapDispatchToProps = (dispatch: Function) => ({
-  getInitialState: () => dispatch(shipmentActions.getInitialState())
-});
-
-export default connect<StateProps, DispatchProps>(
-  mapStateToProps,
-  mapDispatchToProps
-)(Layout);
+export default withRouter(Layout);
