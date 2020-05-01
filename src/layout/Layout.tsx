@@ -42,15 +42,13 @@ const Nav = styled.nav`
 const Link = styled(NavLink)`
   min-width: 90px;
   text-align: center;
-  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 14px;
   cursor: pointer;
   text-decoration: none;
-  :hover, :active{
+  :hover {
     color: black;
-    background: #00FFFF;
+    text-decoration: underline;
   }
-  
 `;
 
 const Head = styled.div`
@@ -70,16 +68,14 @@ const Title = styled.div`
 class Layout extends React.PureComponent<Props> {
   render() {
     const img = require('assets/profile.png');
-    if(!this.props || !this.props.location || !this.props.location.pathname) {
-      return null;
-    }
     return (
       <>
         <Header>
           <Head>
-            <Title><h2>SimpleCrafts</h2></Title>
+            <Title><h3>SimpleCrafts</h3></Title>
             <Nav>
             <Link to="/">Posts</Link>
+            <div>/</div>
             <Link to="/about">About</Link>
           </Nav>
             <Profile><img src={img.default}/></Profile>
