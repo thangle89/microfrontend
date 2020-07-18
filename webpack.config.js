@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const cacheGroups = {
   vendor: {
@@ -12,7 +13,7 @@ const cacheGroups = {
   }
 };
 
-module.exports = {
+const main = {
   output: {
     pathinfo: false,
     path: path.resolve(__dirname, "./dist"),
@@ -25,9 +26,8 @@ module.exports = {
   devtool: "eval-source-map",
 
   entry: {
-    app: [
-      "./src/index.tsx"
-    ]
+    app: "./src/index.tsx",
+    myModule: './src/modules/index.tsx',
   },
   devServer: {
     disableHostCheck: true,
@@ -38,6 +38,7 @@ module.exports = {
     https: false,
     host: "localhost",
     port: "8080",
+    contentBase: path.join(__dirname, 'dist'),
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".png"],
@@ -75,9 +76,11 @@ module.exports = {
       chunks: ["app", ...Object.values(cacheGroups).map(x => x.name)],
       chunksSortMode: "none"
     }),
+    // new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new webpack.WatchIgnorePlugin([/css\.d\.ts$/, /test\.ts(x?)/])
   ],
 
+  //TODO: Make sure have separate dependencies for module
   optimization: {
     removeAvailableModules: false,
     removeEmptyChunks: false,
@@ -89,3 +92,6 @@ module.exports = {
     }
   }
 };
+
+module.exports = main;
+
