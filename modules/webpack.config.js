@@ -18,7 +18,9 @@ const main = {
     pathinfo: false,
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].js",
-    publicPath: "/",
+    publicPath: "http://localhost:9000/",
+    jsonpScriptType: 'module',
+    libraryTarget: 'var',
   },
 
   stats: { children: false, timings: true, colors: true },
@@ -26,7 +28,7 @@ const main = {
   devtool: "eval-source-map",
 
   entry: {
-    app: "./src/index.tsx",
+    myModule: './index.tsx',
   },
   devServer: {
     disableHostCheck: true,
@@ -36,20 +38,25 @@ const main = {
     stats: { children: false },
     https: false,
     host: "localhost",
-    port: "8080",
+    port: "9000",
     contentBase: path.join(__dirname, 'dist'),
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    }
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".png"],
-    modules: [path.resolve("./src"), path.resolve("./node_modules")],
+    modules: [path.resolve("."), path.resolve("./node_modules")],
     plugins: [new TsconfigPathsPlugin()]
   },
   module: {
     rules: [
       {
         test: /\.ts(x?)$/,
-        include: [path.resolve("./src")],
-        exclude: [/node_modules/, /test\.tsx?$/, path.resolve("./modules")],
+        include: [path.resolve(".")],
+        exclude: [/node_modules/, /test\.tsx?$/],
         use: [
           {
             loader: "awesome-typescript-loader",
@@ -59,7 +66,7 @@ const main = {
       },
       {
         test: /\.(png|jpg|gif)$/i,
-        include: [path.resolve(__dirname,"./src/assets")],
+        include: [path.resolve(__dirname,"./assets")],
         use: [
           {
             loader: 'url-loader',
@@ -70,14 +77,18 @@ const main = {
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
-    new HtmlWebpackPlugin({
-      template: "./index.html",
-      chunks: ["app", ...Object.values(cacheGroups).map(x => x.name)],
-      chunksSortMode: "none"
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: "./index.html",
+    //   chunks: ["app", ...Object.values(cacheGroups).map(x => x.name)],
+    //   chunksSortMode: "none"
+    // }),
     // new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new webpack.WatchIgnorePlugin([/css\.d\.ts$/, /test\.ts(x?)/])
   ],
+
+  // externals: {
+  //   react: 'React'
+  // },
 
   //TODO: Make sure have separate dependencies for module
   optimization: {

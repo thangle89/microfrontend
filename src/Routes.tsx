@@ -28,7 +28,7 @@ class Routes extends React.PureComponent<Props, State> {
     };
   }
   componentDidMount() {
-    const dynamicModuleUrl = './myModule.js'; //'./myModule.35637e7f9e6020da3172.js'; //static
+    const dynamicModuleUrl = 'http://localhost:9000/myModule.js'; //'./myModule.35637e7f9e6020da3172.js'; //static
     console.log('loading module');
     import(/* webpackIgnore: true */ dynamicModuleUrl).then(module => {
       console.table(module);
