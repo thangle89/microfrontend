@@ -15,7 +15,7 @@ interface DynamicRoute {
     component: React.ComponentType<any>;
   }
 
-const getAppRoutes = (): DynamicRoute[] => [
+export const getAppRoutes = (): DynamicRoute[] => [
     {path: '/myModule', component: getLazyComponent(LazyMainComponent)}
 ]
 
