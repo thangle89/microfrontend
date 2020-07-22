@@ -3,11 +3,12 @@ import {
   compose,
   applyMiddleware,
   createStore,
+  combineReducers,
   Store
 } from 'redux';
 import reduxThunk from 'redux-thunk';
 import { ApplicationState } from 'store';
-import { reducer } from './Shipment';
+import { reducer as coreReducer } from './index';
 
 export default function configureStore(initialState?: ApplicationState) {
   const windowIfDefined =
@@ -24,7 +25,8 @@ export default function configureStore(initialState?: ApplicationState) {
     initialState: any
   ) => Store<ApplicationState>;
 
-  const store = createStoreWithMiddleware(reducer, initialState) as Store<
+  const reducers = combineReducers({ core: coreReducer });
+  const store = createStoreWithMiddleware(reducers, initialState) as Store<
     ApplicationState
   >;
 

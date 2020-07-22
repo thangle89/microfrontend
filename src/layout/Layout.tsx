@@ -78,7 +78,7 @@ class Layout extends React.PureComponent<Props> {
             <div>/</div>
             <Link to="/about">About</Link>
           </Nav>
-            <Profile><img src={img.default}/></Profile>
+            {/* <Profile><img src={img.default}/></Profile> */}
           </Head>
         </Header>
         <Container>
