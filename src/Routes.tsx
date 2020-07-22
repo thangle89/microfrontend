@@ -4,6 +4,7 @@ import { History } from 'history';
 import Layout from 'layout/Layout';
 import Home from 'components/Home';
 import About from 'components/About';
+import { updateStoreReducer } from 'index';
 
 interface DynamicRoute {
   path: string;
@@ -20,6 +21,10 @@ interface State {
   routes: DynamicRoute[];
 }
 
+declare global {
+  interface Window { modules: any }
+}
+
 class Routes extends React.PureComponent<Props, State> {
   constructor(props){
     super(props);
@@ -32,7 +37,8 @@ class Routes extends React.PureComponent<Props, State> {
     console.log('loading module');
     import(/* webpackIgnore: true */ dynamicModuleUrl).then(module => {
       console.table(module);
-      this.setState({routes: window['routes']})
+      this.setState({routes: window.modules.myModule.routes})
+      updateStoreReducer({module: window.modules.myModule.reducer});
     });
   }
   render() {

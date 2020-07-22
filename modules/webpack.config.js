@@ -86,9 +86,9 @@ const main = {
     new webpack.WatchIgnorePlugin([/css\.d\.ts$/, /test\.ts(x?)/])
   ],
 
-  // externals: {
-  //   react: 'React'
-  // },
+  externals: {
+    react: 'React'
+  },
 
   //TODO: Make sure have separate dependencies for module
   optimization: {

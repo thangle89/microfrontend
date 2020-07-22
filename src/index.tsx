@@ -16,9 +16,20 @@ import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import Routes from 'Routes';
 import configureStore from 'store/configureStore';
+import { combineReducers } from 'redux';
+import { reducer as coreReducer, ApplicationState } from './store/index';
 
 export const browserHistory = createBrowserHistory();
-export const { store } = configureStore(undefined);
+const reducers = combineReducers({ core: coreReducer });
+export const { store } = configureStore(undefined, reducers);
+
+export const updateStoreReducer = (storeReducer) => {
+  const newReducers = combineReducers<ApplicationState>({
+    core: coreReducer,
+    ...storeReducer
+  })
+  store.replaceReducer(newReducers);
+}
 
 // Render function containing the HMR AppContainer
 const renderApp = () => {

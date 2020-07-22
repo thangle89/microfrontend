@@ -89,6 +89,9 @@ const main = {
         vendor: { test: /node_modules/ }
       }
     }
+  },
+  externals: {
+    react: 'React'
   }
 };
 
