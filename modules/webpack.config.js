@@ -19,8 +19,10 @@ const main = {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].js",
     publicPath: "http://localhost:9000/",
-    jsonpScriptType: 'module',
-    libraryTarget: 'var',
+    // jsonpScriptType: 'module',
+    // libraryTarget: 'var',
+    library: '__MyModule',
+    libraryTarget: 'umd'
   },
 
   stats: { children: false, timings: true, colors: true },
