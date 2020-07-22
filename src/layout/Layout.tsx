@@ -10,13 +10,13 @@ interface Props {
   match: any;
 };
 
-const Profile = styled.div`
-  img {
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-  }
-`;
+// const Profile = styled.div`
+//   img {
+//     border-radius: 50%;
+//     width: 50px;
+//     height: 50px;
+//   }
+// `;
 
 const Container = styled.div`
     margin: 0 auto;
@@ -67,7 +67,7 @@ const Title = styled.div`
 
 class Layout extends React.PureComponent<Props> {
   render() {
-    const img = require('assets/profile.png');
+    // const img = require('assets/profile.png');
     return (
       <>
         <Header>
