@@ -1,5 +1,5 @@
 import React from 'react';
-import { reducer } from './store';
+export { reducer } from './store';
 
 declare global {
     interface Window { modules: any }
@@ -25,11 +25,11 @@ export const getAppRoutes = (): DynamicRoute[] => [
     {path: '/myModule', component: getLazyComponent(LazyMainComponent)}
 ]
 
-if(!window.modules) {
-    window.modules = {};
-}
+// if(!window.modules) {
+//     window.modules = {};
+// }
 
-window.modules.myModule =  {
-    routes: getAppRoutes(),
-    reducer: reducer,
-};
+// window.modules.myModule =  {
+//     routes: getAppRoutes(),
+//     reducer: reducer,
+// };

@@ -22,7 +22,7 @@ interface State {
 }
 
 declare global {
-  interface Window { modules: any }
+  interface Window { __MyModule: any }
 }
 
 class Routes extends React.PureComponent<Props, State> {
@@ -37,8 +37,8 @@ class Routes extends React.PureComponent<Props, State> {
     console.log('loading module');
     import(/* webpackIgnore: true */ dynamicModuleUrl).then(module => {
       console.table(module);
-      this.setState({routes: window.modules.myModule.routes})
-      updateStoreReducer({module: window.modules.myModule.reducer});
+      this.setState({routes: window.__MyModule.getAppRoutes()})
+      updateStoreReducer({module: window.__MyModule.reducer});
     });
   }
   render() {
