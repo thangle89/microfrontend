@@ -1,10 +1,6 @@
 import React from 'react';
 export { reducer } from './store';
 
-declare global {
-    interface Window { modules: any }
-}
-
 const LazyMainComponent = React.lazy(() =>  import('./Main'));
 
 const getLazyComponent = (LazyComponent: any) => {
