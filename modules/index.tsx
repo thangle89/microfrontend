@@ -24,12 +24,3 @@ interface DynamicRoute {
 export const getAppRoutes = (): DynamicRoute[] => [
     {path: '/myModule', component: getLazyComponent(LazyMainComponent)}
 ]
-
-// if(!window.modules) {
-//     window.modules = {};
-// }
-
-// window.modules.myModule =  {
-//     routes: getAppRoutes(),
-//     reducer: reducer,
-// };
