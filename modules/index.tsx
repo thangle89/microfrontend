@@ -1,22 +1,15 @@
 import React from 'react';
-export { reducer } from './store';
+import { reducer } from './store';
+import { DynamicModule } from './core/manifest';
+import { getLazyComponent } from './LazyComponent';
 
 const LazyMainComponent = React.lazy(() =>  import('./Main'));
 
-const getLazyComponent = (LazyComponent: any) => {
-    const WrappedComponent: React.FC = () => {
-        return <React.Suspense fallback={<div>Loading</div>}>
-            <LazyComponent />
-        </React.Suspense>
-    }
-    return WrappedComponent;
+const module: DynamicModule = {
+    getRoutes: () => [
+        { path: '/myModule', component: getLazyComponent(LazyMainComponent) }
+    ],
+    reducer: reducer,
 }
 
-interface DynamicRoute {
-    path: string;
-    component: React.ComponentType<any>;
-  }
-
-export const getAppRoutes = (): DynamicRoute[] => [
-    {path: '/myModule', component: getLazyComponent(LazyMainComponent)}
-]
+export default module;

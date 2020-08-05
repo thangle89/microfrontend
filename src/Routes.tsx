@@ -1,29 +1,21 @@
 import React from 'react';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
-import { History } from 'history';
+
 import Layout from 'layout/Layout';
 import Home from 'components/Home';
 import About from 'components/About';
 import { updateStoreReducer } from 'index';
+import { Props } from './types';
+import { DynamicModule, DynamicRoute } from 'core/manifest';
 
-interface DynamicRoute {
-  path: string;
-  component: React.ComponentType<any>;
-}
-
-interface Props {
-  history: History;
-  location: any;
-  match: any;
+declare global {
+  interface Window { __MyModule: { default: DynamicModule } }
 }
 
 interface State {
   routes: DynamicRoute[];
 }
 
-declare global {
-  interface Window { __MyModule: any }
-}
 
 class Routes extends React.PureComponent<Props, State> {
   constructor(props){
@@ -34,11 +26,9 @@ class Routes extends React.PureComponent<Props, State> {
   }
   componentDidMount() {
     const dynamicModuleUrl = 'http://localhost:9000/myModule.js'; //'./myModule.35637e7f9e6020da3172.js'; //static
-    console.log('loading module');
-    import(/* webpackIgnore: true */ dynamicModuleUrl).then(module => {
-      console.table(module);
-      this.setState({routes: window.__MyModule.getAppRoutes()})
-      updateStoreReducer({module: window.__MyModule.reducer});
+    import(/* webpackIgnore: true */ dynamicModuleUrl).then(_ => {
+      this.setState({routes: window.__MyModule.default.getRoutes()})
+      updateStoreReducer({module: window.__MyModule.default.reducer});
     });
   }
   render() {
