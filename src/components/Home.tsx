@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ApplicationState, coreActions } from 'store';
+import { ApplicationState } from 'store';
 import { connect } from 'react-redux';
+import { coreActions } from 'core/store';
 
 interface DispatchProps {
     updateCore: typeof coreActions.updateCore;
