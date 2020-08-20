@@ -1,9 +1,9 @@
 {
-  "name": "thangleblog",
+  "name": "microfrontendboostrap",
   "version": "1.0.0",
-  "description": "Personal blog",
+  "description": "Micro Frontend boostrap",
   "main": "index.js",
-  "repository": "git@github.com:thangle89/blog.git",
+  "repository": "git@github.com:thangle89/microfrontend.git",
   "author": "thangle",
   "license": "MIT",
   "scripts": {

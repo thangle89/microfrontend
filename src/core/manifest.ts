@@ -1,4 +1,3 @@
-
 export interface DynamicRoute {
     path: string;
     component: React.ComponentType<any>;

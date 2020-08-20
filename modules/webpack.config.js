@@ -19,8 +19,6 @@ const main = {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].js",
     publicPath: "http://localhost:9000/",
-    // jsonpScriptType: 'module',
-    // libraryTarget: 'var',
     library: '__MyModule',
     libraryTarget: 'umd'
   },
@@ -79,12 +77,6 @@ const main = {
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
-    // new HtmlWebpackPlugin({
-    //   template: "./index.html",
-    //   chunks: ["app", ...Object.values(cacheGroups).map(x => x.name)],
-    //   chunksSortMode: "none"
-    // }),
-    // new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new webpack.WatchIgnorePlugin([/css\.d\.ts$/, /test\.ts(x?)/])
   ],
 
@@ -92,7 +84,6 @@ const main = {
     react: 'React'
   },
 
-  //TODO: Make sure have separate dependencies for module
   optimization: {
     removeAvailableModules: false,
     removeEmptyChunks: false,
