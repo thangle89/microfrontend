@@ -19,4 +19,4 @@ Module can access and update its own store and the store that are defined in com
 1. `Yarn start` in root folder
 2. `Yarn start` in `modules/`
 
-For details setup explaination please refer to following link _(comming soon...)_
+For details setup explaination _(comming soon...)_
