@@ -31,6 +31,8 @@ export const updateStoreReducer = (storeReducer) => {
   store.replaceReducer(newReducers);
 }
 
+globalThis.React = React; // export dependencies for modules
+
 // Render function containing the HMR AppContainer
 const renderApp = () => {
   render(

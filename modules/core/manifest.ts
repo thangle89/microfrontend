@@ -6,4 +6,6 @@ interface DynamicRoutes {
 export interface DynamicModule {
     getRoutes: () => DynamicRoutes[]
     reducer: Function;
+    selectors: {[key: string]: Function};
+    moduleKey: string;
 }

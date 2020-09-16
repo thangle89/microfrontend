@@ -10,6 +10,8 @@ const module: DynamicModule = {
         { path: '/myModule', component: getLazyComponent(LazyMainComponent) }
     ],
     reducer: reducer,
+    selectors: {},
+    moduleKey: 'module',
 }
 
 export default module;

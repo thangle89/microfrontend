@@ -90,9 +90,9 @@ const main = {
       }
     }
   },
-  externals: {
-    react: 'React'
-  }
+  // externals: {
+  //   react: 'React'
+  // }
 };
 
 module.exports = main;

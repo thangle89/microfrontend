@@ -77,7 +77,8 @@ const main = {
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
-    new webpack.WatchIgnorePlugin([/css\.d\.ts$/, /test\.ts(x?)/])
+    new webpack.WatchIgnorePlugin([/css\.d\.ts$/, /test\.ts(x?)/]),
+    new CleanWebpackPlugin(),
   ],
 
   externals: {

@@ -10,7 +10,7 @@ interface CoreSate {
 }
 export interface ApplicationState {
   core: CoreSate;
-  module: any;
+  [key: string]: any;
 }
 
 export const reducer: Reducer<CoreSate> = (
