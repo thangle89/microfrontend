@@ -36,13 +36,6 @@ export const registerModuleToMainApp = (module: DynamicModule) => {
   store.dispatch(coreActions.updateSelectors(module.selectors));
 }
 
-export const getModuleState = (moduleStateKey: string, moduleKey:string, state: ApplicationState) => {
-  if (state.selectors[moduleStateKey] && state[moduleKey]) { 
-    return state.selectors[moduleStateKey](state[moduleKey]); 
-  }
-  return null;
-}
-
 globalThis.React = React; // export dependencies for modules
 
 // Render function containing the HMR AppContainer

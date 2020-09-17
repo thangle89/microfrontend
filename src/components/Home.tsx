@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ApplicationState } from 'store';
 import { connect } from 'react-redux';
-import { coreActions } from 'core/store';
-import { getModuleState } from 'index';
+import { coreActions, getModuleState } from 'core/store';
 
 interface DispatchProps {
     updateCore: typeof coreActions.updateCore;
