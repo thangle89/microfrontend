@@ -1,11 +1,7 @@
 import { Reducer } from 'redux';
+import { ApplicationCoreState } from './core/store'; // will move to npm package
 
-interface CoreSate {
-    status: string;
-}
-
-export interface ApplicationState {
-    core: CoreSate;
+export interface ApplicationState extends ApplicationCoreState {
     module: ModuleState;
 }
 
@@ -41,3 +37,5 @@ export const reducer: Reducer<ModuleState> = (
     }
     return state;
 };
+
+export const selectModuleState = (state: ModuleState) => state.status;

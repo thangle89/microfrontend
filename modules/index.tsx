@@ -1,5 +1,5 @@
 import React from 'react';
-import { reducer } from './store';
+import { reducer, selectModuleState } from './store';
 import { DynamicModule } from './core/manifest';
 import { getLazyComponent } from './LazyComponent';
 
@@ -10,7 +10,7 @@ const module: DynamicModule = {
         { path: '/myModule', component: getLazyComponent(LazyMainComponent) }
     ],
     reducer: reducer,
-    selectors: {},
+    selectors: {'module.status': selectModuleState},
     moduleKey: 'module',
 }
 

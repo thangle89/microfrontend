@@ -20,7 +20,7 @@ const Main: React.FC<DispatchProps & StateProps> = (props) => {
     }
 
     const updateCoreHandler = () => {
-        props.updateCore('core is updated from module');
+        props.updateCore('common is updated from module');
     };
     return (<div>My dynamic Module
         <div>core status: {props.coreStatus}</div>
@@ -32,7 +32,7 @@ const Main: React.FC<DispatchProps & StateProps> = (props) => {
 
 const mapStateToProps = (state: ApplicationState): StateProps => {
     return {
-        coreStatus: state.core.status,
+        coreStatus: state.common.status,
         moduleStatus: state.module.status
      };
 }

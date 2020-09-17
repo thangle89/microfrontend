@@ -4,7 +4,7 @@ import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import Layout from 'layout/Layout';
 import Home from 'components/Home';
 import About from 'components/About';
-import { updateStoreReducer } from 'index';
+import { registerModuleToMainApp } from 'index';
 import { Props } from './types';
 import { DynamicModule, DynamicRoute } from 'core/manifest';
 
@@ -28,7 +28,7 @@ class Routes extends React.PureComponent<Props, State> {
     const dynamicModuleUrl = 'http://localhost:9000/myModule.js'; //'./myModule.35637e7f9e6020da3172.js'; //static
     import(/* webpackIgnore: true */ dynamicModuleUrl).then(_ => {
       this.setState({routes: window.__MyModule.default.getRoutes()})
-      updateStoreReducer({[window.__MyModule.default.moduleKey]: window.__MyModule.default.reducer });
+      registerModuleToMainApp(window.__MyModule.default);
     });
   }
   render() {

@@ -1,20 +1,16 @@
 import { Reducer } from 'redux';
-import { CoreUpdateActionType, CoreActionTypes } from 'core/store';
+import { CoreUpdateActionType, CoreActionTypes, CommonState, ModuleSelector, SelectorsUpdateActionType, ApplicationCoreState } from 'core/store';
 
-const initialState: CoreSate = {
+const initialState: CommonState = {
   status: 'uninitialize',
 }
 
-interface CoreSate {
-  status: string;
-}
-export interface ApplicationState {
-  core: CoreSate;
+export interface ApplicationState extends ApplicationCoreState {
   [key: string]: any;
 }
 
-export const reducer: Reducer<CoreSate> = (
-  state: CoreSate = initialState,
+export const reducer: Reducer<CommonState> = (
+  state: CommonState = initialState,
   action: CoreUpdateActionType
 ) => {
   switch (action.type) {
@@ -22,6 +18,21 @@ export const reducer: Reducer<CoreSate> = (
 
       return {
         status: action.payload,
+      };
+  }
+  return state;
+};
+
+export const selectorsReducer: Reducer<ModuleSelector> = (
+  state: ModuleSelector = {},
+  action: SelectorsUpdateActionType,
+) => {
+  switch (action.type) {
+    case CoreActionTypes.UpdateSelectors:
+
+      return {
+        ...state,
+        ...action.payload,
       };
   }
   return state;

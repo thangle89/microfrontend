@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ApplicationState } from 'store';
 import { connect } from 'react-redux';
 import { coreActions } from 'core/store';
+import { getModuleState } from 'index';
 
 interface DispatchProps {
     updateCore: typeof coreActions.updateCore;
@@ -10,14 +11,17 @@ interface DispatchProps {
 
 interface StateProps {
     status: string;
+    moduleStatus: string;
 }
 
 const Home: React.FC<StateProps & DispatchProps> = (props) => {
     React.useEffect(() => {
+        if(!props.status)
         props.updateCore('loaded')
-    }, []);
+    }, [props.status]);
     return <div>Home Page
-        <div>status: {props.status}</div>
+        <div>common store status: {props.status}</div>
+        <div>Module status: {props.moduleStatus}</div>
         <div>
             <Link to='/myModule'>My module</Link>
         </div>
@@ -25,7 +29,10 @@ const Home: React.FC<StateProps & DispatchProps> = (props) => {
 }
 
 const mapStateToProps = (state: ApplicationState): StateProps => {
-    return { status: state.core.status };
+    return {
+        status: state.common.status,
+        moduleStatus: getModuleState('module.status', 'module', state),
+    };
 }
 
 const mapDispatchToProps = (dispatch: Function): DispatchProps => ({

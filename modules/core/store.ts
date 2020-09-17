@@ -14,4 +14,13 @@ export interface CoreUpdateActionType {
     payload: string;
 }
 
+export interface CommonState {
+    status: string;
+}
+export type ModuleSelector = { [key: string]: Function }
+export interface ApplicationCoreState {
+    common: CommonState;
+    selectors: ModuleSelector;
+}
+
 export const coreActions = { ...actionCreators };

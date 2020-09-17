@@ -17,18 +17,30 @@ import { createBrowserHistory } from 'history';
 import Routes from 'Routes';
 import configureStore from 'store/configureStore';
 import { combineReducers } from 'redux';
-import { reducer as coreReducer, ApplicationState } from './store/index';
+import { reducer as commonReducer, ApplicationState, selectorsReducer } from './store/index';
+import { DynamicModule } from 'core/manifest';
+import { coreActions } from 'core/store';
 
 export const browserHistory = createBrowserHistory();
-const reducers = combineReducers({ core: coreReducer });
+const reducers = combineReducers({ common: commonReducer, selectors: selectorsReducer});
 export const { store } = configureStore(undefined, reducers);
+store['dynamicReducers'] = { common: commonReducer, selectors: selectorsReducer};
 
-export const updateStoreReducer = (storeReducer) => {
+export const registerModuleToMainApp = (module: DynamicModule) => {
   const newReducers = combineReducers<ApplicationState>({
-    core: coreReducer,
-    ...storeReducer
-  })
+    ...store['dynamicReducers'],
+    [module.moduleKey]: module.reducer,
+  });
   store.replaceReducer(newReducers);
+  store['dynamicReducers'] = { ...store['dynamicReducers'], [module.moduleKey]: module.reducer };
+  store.dispatch(coreActions.updateSelectors(module.selectors));
+}
+
+export const getModuleState = (moduleStateKey: string, moduleKey:string, state: ApplicationState) => {
+  if (state.selectors[moduleStateKey] && state[moduleKey]) { 
+    return state.selectors[moduleStateKey](state[moduleKey]); 
+  }
+  return null;
 }
 
 globalThis.React = React; // export dependencies for modules
