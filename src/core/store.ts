@@ -35,9 +35,10 @@ export interface SelectorsUpdateActionType {
     payload: ModuleSelector;
 }
 
-export const getModuleState = (moduleStateKey: string, moduleKey:string, state: ApplicationCoreState) => {
-    if (state.selectors[moduleStateKey] && state[moduleKey]) {
-      return state.selectors[moduleStateKey](state[moduleKey]);
+export const getModuleState = (moduleStateKey: string, actionKey:string, state: ApplicationCoreState) => {
+    const selector = state.selectors[`${moduleStateKey}.${actionKey}`]
+    if (selector && typeof selector === 'function' && state[moduleStateKey]) {
+      return selector(state[moduleStateKey]);
     }
     return null;
   }

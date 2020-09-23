@@ -6,11 +6,11 @@ import { getLazyComponent } from './LazyComponent';
 const LazyMainComponent = React.lazy(() =>  import('./Main'));
 
 const module: DynamicModule = {
-    getRoutes: () => [
+    routes: [
         { path: '/myModule', component: getLazyComponent(LazyMainComponent) }
     ],
     reducer: reducer,
-    selectors: {'module.status': selectModuleState},
+    selectors: {'module.getStatus': selectModuleState},
     moduleKey: 'module',
 }
 

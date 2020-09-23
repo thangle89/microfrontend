@@ -27,7 +27,7 @@ class Routes extends React.PureComponent<Props, State> {
   componentDidMount() {
     const dynamicModuleUrl = 'http://localhost:9000/myModule.js'; //'./myModule.35637e7f9e6020da3172.js'; //static
     import(/* webpackIgnore: true */ dynamicModuleUrl).then(_ => {
-      this.setState({routes: window.__MyModule.default.getRoutes()})
+      this.setState({routes: window.__MyModule.default.routes})
       registerModuleToMainApp(window.__MyModule.default);
     });
   }

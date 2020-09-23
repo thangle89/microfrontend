@@ -30,7 +30,7 @@ const Home: React.FC<StateProps & DispatchProps> = (props) => {
 const mapStateToProps = (state: ApplicationState): StateProps => {
     return {
         status: state.common.status,
-        moduleStatus: getModuleState('module.status', 'module', state),
+        moduleStatus: getModuleState('module','getStatus', state),
     };
 }
 

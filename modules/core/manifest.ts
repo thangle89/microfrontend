@@ -4,7 +4,7 @@ interface DynamicRoutes {
     component: React.ComponentType<{}>;
 }
 export interface DynamicModule {
-    getRoutes: () => DynamicRoutes[]
+    routes: DynamicRoutes[]
     reducer: Function;
     selectors: {[key: string]: Function};
     moduleKey: string;
